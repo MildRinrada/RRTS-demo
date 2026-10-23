@@ -1,0 +1,451 @@
+/*
+ * The customer's page. A single column made for a phone held in one hand, centred on larger screens.
+ * Its signature is the repair tag: the paper tag that hangs on a device in the shop,
+ * carrying the job number the customer reads out on the phone.
+ */
+.cust {
+  font-variant-numeric: tabular-nums;
+  min-height: 100dvh;
+  background: var(--ground);
+}
+.cust__bar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: var(--ground);
+}
+.cust__bar-in {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  max-width: 600px;
+  margin-inline: auto;
+  padding: 12px 16px;
+}
+.iconbtn--line {
+  color: #06a34a;
+}
+.cust__main {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 600px;
+  margin-inline: auto;
+  padding: 4px 16px 48px;
+}
+.cust__title {
+  font-size: var(--fs-title);
+  font-weight: 700;
+}
+
+/* the answer: when do I get it back */
+.answer {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 22px 20px;
+  border-radius: 14px;
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--border);
+}
+.answer__q {
+  color: var(--muted);
+  font-weight: 500;
+}
+.answer__big {
+  font-size: clamp(1.875rem, 1.6rem + 1.4vw, 2.125rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+.answer__sub {
+  font-size: 1.0625rem;
+}
+.answer__note {
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+.answer--ready {
+  box-shadow: inset 0 0 0 1px #bfe6cd;
+  background: #f4fbf6;
+}
+.answer--ready .answer__q {
+  color: var(--st-green-ink);
+}
+.answer--done .answer__big {
+  font-size: clamp(1.5rem, 1.2rem + 1.6vw, 1.875rem);
+}
+.answer .btn {
+  align-self: flex-start;
+  margin-top: 8px;
+}
+.why {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 10px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: var(--st-grey-bg);
+  color: var(--st-grey-ink);
+}
+.why strong {
+  color: var(--text);
+  font-weight: 600;
+}
+.why--orange {
+  background: var(--st-orange-bg);
+  color: var(--st-orange-ink);
+}
+.why--yellow {
+  background: var(--st-yellow-bg);
+}
+.promptpay {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 10px;
+  background: var(--surface);
+}
+.promptpay img {
+  width: 128px;
+  height: 128px;
+  object-fit: contain;
+  flex: none;
+}
+.promptpay figcaption {
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+/* the quote to approve: the one tinted area on the page */
+.approve {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  border-radius: 14px;
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px var(--accent-track);
+}
+.approve__title {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--accent-ink);
+}
+.approve__total {
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+.approve__flag {
+  font-size: 0.875rem;
+  color: var(--accent-ink);
+  font-weight: 500;
+}
+.approve__actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 4px;
+}
+.approve__actions .btn {
+  min-height: 52px;
+  font-weight: 600;
+  border-color: var(--text);
+  background: var(--surface);
+}
+.approve__actions .btn:hover {
+  background: var(--raised);
+}
+.approve > .btn--ghost {
+  align-self: center;
+}
+.lines {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+}
+.lines td {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+.approve .lines td {
+  border-bottom-color: var(--accent-track);
+}
+.lines td.num {
+  text-align: right;
+  white-space: nowrap;
+  padding-inline-start: 12px;
+}
+.lines__kind {
+  display: block;
+  color: var(--muted);
+  font-size: var(--fs-small);
+}
+.lines tfoot td {
+  border: 0;
+  font-weight: 600;
+}
+
+/* the repair tag */
+.tag {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 18px 16px 28px;
+  border-radius: 14px;
+  background: var(--surface);
+  box-shadow:
+    inset 8px 0 0 var(--accent-track),
+    inset 0 0 0 1px var(--border);
+}
+.tag__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.tag__no {
+  font-size: 1.25rem;
+}
+.tag__device {
+  font-weight: 600;
+  font-size: 1.0625rem;
+}
+
+/* the path from intake to pickup */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  padding: 4px 2px;
+}
+.steps li {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+.steps li::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: -50%;
+  right: 50%;
+  height: 2px;
+  background: var(--border);
+}
+.steps li:first-child::before {
+  display: none;
+}
+.steps__mark {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--surface);
+  box-shadow: inset 0 0 0 2px var(--control);
+}
+.steps__done::before,
+.steps__now::before {
+  background: var(--accent);
+}
+.steps__done .steps__mark {
+  background: var(--accent);
+  box-shadow: none;
+}
+.steps__now {
+  color: var(--text);
+  font-weight: 600;
+}
+.steps__now .steps__mark {
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-track);
+}
+
+/* sections */
+.csec {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px 20px;
+  border-radius: 14px;
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--border);
+}
+.csec__title {
+  font-size: 1.0625rem;
+  font-weight: 600;
+}
+.ctl {
+  display: flex;
+  flex-direction: column;
+}
+.ctl li {
+  position: relative;
+  display: flex;
+  gap: 12px;
+  padding-bottom: 14px;
+}
+.ctl li:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 16px;
+  bottom: 0;
+  width: 2px;
+  background: var(--rule);
+}
+.ctl__dot {
+  flex: none;
+  width: 12px;
+  height: 12px;
+  margin-top: 6px;
+  border-radius: 50%;
+  background: var(--control);
+}
+.ctl__dot--grey {
+  background: var(--st-grey);
+}
+.ctl__dot--yellow {
+  background: var(--st-yellow);
+}
+.ctl__dot--blue {
+  background: var(--st-blue);
+}
+.ctl__dot--orange {
+  background: var(--st-orange);
+}
+.ctl__dot--green {
+  background: var(--st-green);
+}
+.ctl__dot--faded {
+  background: var(--st-faded);
+}
+.ctl__text {
+  overflow-wrap: anywhere;
+}
+.ctl__latest .ctl__text {
+  font-weight: 600;
+}
+.ctl__at {
+  color: var(--muted);
+  font-size: var(--fs-small);
+}
+.cphotos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.cphotos li {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: var(--muted);
+}
+.cphotos button {
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  aspect-ratio: 1;
+  background: var(--raised);
+  cursor: zoom-in;
+}
+.cphotos img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--dur) var(--ease);
+}
+.cphotos button:hover img {
+  transform: scale(1.03);
+}
+.lightbox {
+  width: 100%;
+  max-height: 70dvh;
+  object-fit: contain;
+  border-radius: 8px;
+  background: var(--raised);
+}
+.cfoot {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 4px;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+.cfoot__name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text);
+  font-weight: 600;
+}
+.cfoot__name svg {
+  width: 16px;
+  height: 16px;
+  color: var(--accent);
+}
+
+/* my repairs (LINE) */
+.mylist {
+  display: flex;
+  flex-direction: column;
+}
+.mylist li + li {
+  border-top: 1px solid var(--rule);
+}
+.mylist__row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  color: var(--text);
+  text-decoration: none;
+}
+.mylist__row:hover {
+  color: var(--text);
+}
+.mylist__main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.mylist__warranty {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--positive);
+}
+.mylist__warranty svg {
+  width: 14px;
+  height: 14px;
+}
+.mylist__chev {
+  width: 18px;
+  height: 18px;
+  color: var(--faint);
+  flex: none;
+}
+
+@media (max-width: 380px) {
+  .steps__label {
+    font-size: 0.6875rem;
+  }
+  .approve__actions {
+    grid-template-columns: 1fr;
+  }
+}

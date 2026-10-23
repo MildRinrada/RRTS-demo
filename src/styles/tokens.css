@@ -1,0 +1,107 @@
+/*
+ * One token layer for the shop and the customer page.
+ * Style: accent ladder. The shop's raspberry at full strength only on small marks (the one filled
+ * button, the active nav icon, the revenue bars), its pale tints on areas (the active nav row, the
+ * quote-to-approve band). The ground leans one step toward the raspberry's palest tint.
+ * The status colours are fixed by the design doc and mean the same thing on every screen.
+ */
+:root {
+  --ground: #fbf7f8;
+  --surface: #ffffff;
+  --raised: #f6f0f2;
+  --active: #f1e8ec;
+  --border: #ece4e8;
+  --rule: #f3edf0;
+  --control: #d5ccd1;
+  --text: #16121a;
+  --muted: #5f5a66;
+  --faint: #6b6672;
+
+  --accent: #b8336a;
+  --accent-hover: #9d2a5a;
+  --accent-active: #82224b;
+  --accent-soft: #fdf2f7;
+  --accent-track: #f8dbe8;
+  --accent-ink: #6b1d3e;
+  --on-accent: #ffffff;
+
+  --positive: #247b50;
+  --negative: #c4242a;
+  --warning: #92400e;
+  --pill-positive-bg: #dcfce7;
+  --pill-positive-ink: #14532d;
+  --pill-negative-bg: #ffedea;
+  --pill-negative-ink: #831c1e;
+  --pill-warning-bg: #fffbeb;
+  --pill-warning-ink: #92400e;
+  --pill-neutral-bg: #f1eef0;
+  --pill-neutral-ink: #3f3a44;
+  --notice-warning-border: #fde68a;
+
+  /* status: a full hue for the dot, a pale fill and a dark ink of the same hue for the pill */
+  --st-grey: #8a8f98;
+  --st-grey-bg: #eff0f2;
+  --st-grey-ink: #3c4250;
+  --st-yellow: #d4a106;
+  --st-yellow-bg: #fdf3cc;
+  --st-yellow-ink: #634a00;
+  --st-blue: #2f6fd6;
+  --st-blue-bg: #e3edfc;
+  --st-blue-ink: #17447f;
+  --st-orange: #e0761c;
+  --st-orange-bg: #ffead6;
+  --st-orange-ink: #7f360a;
+  --st-green: #2f9e5b;
+  --st-green-bg: #daf3e3;
+  --st-green-ink: #134e2f;
+  --st-faded: #b4b6bd;
+  --st-faded-bg: #f3f3f5;
+  --st-faded-ink: #62666f;
+
+  --scrim: rgb(22 18 26 / 0.5);
+  --shadow-float: 0 12px 32px rgb(22 18 26 / 0.16), 0 2px 6px rgb(22 18 26 / 0.08);
+
+  --font: "IBM Plex Sans Thai", "Noto Sans Thai", system-ui, sans-serif;
+  --fs-title: 1.625rem;
+  --fs-section: 1.125rem;
+  --fs-kpi: 1.5rem;
+  --fs-lead: 2rem;
+  --fs-body: 0.9375rem;
+  --fs-small: 0.8125rem;
+  --lh: 1.6;
+
+  --radius-card: 8px;
+  --radius-control: 6px;
+  --radius-chip: 4px;
+
+  --gap: 24px;
+  --pad: 24px;
+  --card-pad: 20px;
+  --control-h: 36px;
+  --control-h-lg: 44px;
+  --control-h-sm: 30px;
+  --sidebar-w: 232px;
+  --rail-w: 368px;
+  --tap: 44px;
+
+  --dur: 140ms;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  color-scheme: light;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --pad: 16px;
+    --gap: 16px;
+    --card-pad: 16px;
+    --fs-title: 1.375rem;
+    --control-h: 42px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur: 0ms;
+  }
+}

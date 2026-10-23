@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { Download, Phone } from 'lucide-react';
@@ -158,10 +158,12 @@ export function Reports() {
                   {s.methods.length > 0 && (
                     <p className="t-small t-muted">
                       {s.methods.map((m, i) => (
-                        <span key={m.method} className="nowrap">
+                        <Fragment key={m.method}>
                           {i > 0 && ', '}
-                          {m.label} {fmt.baht(m.total)}
-                        </span>
+                          <span className="nowrap">
+                            {m.label} {fmt.baht(m.total)}
+                          </span>
+                        </Fragment>
                       ))}
                     </p>
                   )}
@@ -237,7 +239,7 @@ export function Reports() {
                     งานต่อช่าง
                   </h2>
                   {s.perTech.length ? (
-                    <table className="table table--flush">
+                    <table className="table table--flush table--keep">
                       <thead>
                         <tr>
                           <th>ช่าง</th>

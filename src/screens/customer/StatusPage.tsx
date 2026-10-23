@@ -4,6 +4,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { CircleCheck, Download, MessageCircle, Phone, PhoneCall, Wrench } from 'lucide-react';
 import { api, errorMessage } from '../../api/client';
 import type { JobStatus, PublicJob } from '../../api/types';
+import { ShopMark } from '../../components/ShopMark';
 import { useToast } from '../../components/Toast';
 import { Button, Dialog, LinkButton, QueryState } from '../../components/ui';
 import { daysFromToday, fmt, ITEM_LABEL, PHOTO_LABEL, relDay, STATUS_TONE, telHref } from '../../lib/format';
@@ -20,16 +21,7 @@ export function StatusPage() {
     <div className="cust">
       <header className="cust__bar">
         <div className="cust__bar-in">
-          <span className="shopmark shopmark--md">
-            {job?.shop.logoUrl ? (
-              <img className="shopmark__img" src={job.shop.logoUrl} alt="" />
-            ) : (
-              <span className="shopmark__mono" aria-hidden="true">
-                {Array.from((job?.shop.shopName ?? '').replace(/^ร้าน\s*/, ''))[0] ?? ''}
-              </span>
-            )}
-            <span className="shopmark__name">{job?.shop.shopName ?? ''}</span>
-          </span>
+          <ShopMark name={job?.shop.shopName ?? ''} logoUrl={job?.shop.logoUrl ?? null} />
           <span className="cluster">
             {job?.shop.lineOaUrl && (
               <a className="iconbtn iconbtn--line" href={job.shop.lineOaUrl} target="_blank" rel="noopener" aria-label="แชท LINE ของร้าน">

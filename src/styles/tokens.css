@@ -1,29 +1,31 @@
 /*
  * One token layer for the shop and the customer page.
- * Style: accent ladder. The shop's raspberry at full strength only on small marks (the one filled
- * button, the active nav icon, the revenue bars), its pale tints on areas (the active nav row, the
- * quote-to-approve band). The ground leans one step toward the raspberry's palest tint.
+ * Style: workwear green on a warm grey floor. White cards sit flat on the grey with square corners;
+ * the deep green fills the one action that matters on each screen and the selected item in a list.
  * The status colours are fixed by the design doc and mean the same thing on every screen.
  */
 :root {
-  --ground: #fbf7f8;
+  --ground: #ebe9e5;
   --surface: #ffffff;
-  --raised: #f6f0f2;
-  --active: #f1e8ec;
-  --border: #ece4e8;
-  --rule: #f3edf0;
-  --control: #d5ccd1;
-  --text: #16121a;
-  --muted: #5f5a66;
-  --faint: #6b6672;
+  --raised: #f1f0ed;
+  --active: #e3e1dc;
+  --border: #e0ddd7;
+  --rule: #ecebe7;
+  --control: #cfcbc4;
+  --text: #121412;
+  --muted: #55574f;
+  --faint: #66685f;
+  --btn-2: #ecebe7;
+  --btn-2-hover: #e1dfda;
 
-  --accent: #b8336a;
-  --accent-hover: #9d2a5a;
-  --accent-active: #82224b;
-  --accent-soft: #fdf2f7;
-  --accent-track: #f8dbe8;
-  --accent-ink: #6b1d3e;
+  --accent: #0b6b3a;
+  --accent-hover: #095a31;
+  --accent-active: #074927;
+  --accent-soft: #e8f2ec;
+  --accent-track: #c9e1d2;
+  --accent-ink: #07462a;
   --on-accent: #ffffff;
+  --ink-block: #111311;
 
   --positive: #247b50;
   --negative: #c4242a;
@@ -34,8 +36,8 @@
   --pill-negative-ink: #831c1e;
   --pill-warning-bg: #fffbeb;
   --pill-warning-ink: #92400e;
-  --pill-neutral-bg: #f1eef0;
-  --pill-neutral-ink: #3f3a44;
+  --pill-neutral-bg: #ecebe7;
+  --pill-neutral-ink: #3d3f39;
   --notice-warning-border: #fde68a;
 
   /* status: a full hue for the dot, a pale fill and a dark ink of the same hue for the pill */
@@ -58,10 +60,10 @@
   --st-faded-bg: #f3f3f5;
   --st-faded-ink: #62666f;
 
-  --scrim: rgb(22 18 26 / 0.5);
-  --shadow-float: 0 12px 32px rgb(22 18 26 / 0.16), 0 2px 6px rgb(22 18 26 / 0.08);
+  --scrim: rgb(18 20 18 / 0.5);
+  --shadow-float: 0 14px 36px rgb(18 20 18 / 0.14), 0 2px 6px rgb(18 20 18 / 0.06);
 
-  --font: "IBM Plex Sans Thai", "Noto Sans Thai", system-ui, sans-serif;
+  --font: "Anuphan", "Noto Sans Thai", system-ui, sans-serif;
   /* type scale: 15 for hints and secondary lines, 16 for tables and controls, 17 for reading */
   --fs-xs: 0.9375rem;
   --fs-sm: 1rem;
@@ -74,9 +76,9 @@
   --fs-lead: 2.25rem;
   --lh: 1.65;
 
-  --radius-card: 8px;
-  --radius-control: 6px;
-  --radius-chip: 4px;
+  --radius-card: 2px;
+  --radius-control: 0px;
+  --radius-chip: 0px;
 
   --gap: 24px;
   --pad: 24px;

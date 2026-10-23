@@ -246,12 +246,13 @@ function JobCard({ j }: { j: BoardJob }) {
         e.dataTransfer.effectAllowed = 'move';
       }}
     >
-      <span className="card__top">
-        <span className="thumb">{j.thumbUrl ? <img src={j.thumbUrl} alt="" loading="lazy" /> : <CategoryIcon c={j.category} />}</span>
-        <span className="card__id">
-          <span className="code card__no">{j.jobNo}</span>
-          <strong className="card__device">{j.device}</strong>
+      {j.thumbUrl && <img className="card__photo" src={j.thumbUrl} alt="" loading="lazy" />}
+      <span className="card__id">
+        <span className="code card__no">
+          {!j.thumbUrl && <CategoryIcon c={j.category} />}
+          {j.jobNo}
         </span>
+        <strong className="card__device">{j.device}</strong>
       </span>
       <span className="card__who">
         {j.customerName}

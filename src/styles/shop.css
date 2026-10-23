@@ -61,12 +61,12 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  min-height: 36px;
-  padding: 0 10px;
+  min-height: 44px;
+  padding: 0 12px;
   border: 0;
-  border-radius: 8px;
+  border-radius: var(--radius-control);
   background: transparent;
-  color: var(--muted);
+  color: var(--text);
   font-size: var(--fs-sm);
   text-align: start;
   text-decoration: none;
@@ -83,12 +83,12 @@
   color: var(--text);
 }
 .navlink.active {
-  background: var(--accent-soft);
-  color: var(--accent-ink);
-  font-weight: 500;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 600;
 }
 .navlink.active svg {
-  color: var(--accent);
+  color: var(--on-accent);
 }
 .side__user {
   min-height: 44px;
@@ -232,7 +232,7 @@
 /* ---------------- panels ---------------- */
 .panel {
   padding: var(--card-pad);
-  border: 1px solid var(--border);
+  border: 1px solid transparent;
   border-radius: var(--radius-card);
   background: var(--surface);
   min-width: 0;
@@ -290,8 +290,8 @@
   gap: 8px;
   min-height: 240px;
   padding: 10px;
-  border-radius: 10px;
-  background: var(--raised);
+  border-radius: var(--radius-card);
+  background: var(--active);
   transition: box-shadow var(--dur) var(--ease);
 }
 .col--over {
@@ -344,9 +344,9 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding: 10px 12px 10px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
+  padding: 12px 14px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-card);
   background: var(--surface);
   color: var(--text);
   text-decoration: none;
@@ -356,7 +356,7 @@
     transform var(--dur) var(--ease);
 }
 .card:hover {
-  border-color: #cfc3c9;
+  border-color: var(--accent);
   color: var(--text);
 }
 .card:active {
@@ -365,11 +365,15 @@
 .card--late {
   box-shadow: inset 3px 0 0 var(--negative);
 }
-.card__top {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  min-width: 0;
+/* the device's intake photo runs edge to edge across the top of the card */
+.card__photo {
+  display: block;
+  width: calc(100% + 28px);
+  max-width: none;
+  margin: -12px -14px 2px;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: var(--raised);
 }
 .card__id {
   display: flex;
@@ -377,9 +381,18 @@
   min-width: 0;
 }
 .card__no {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   font-size: var(--fs-xs);
   color: var(--muted);
   font-weight: 500;
+  white-space: nowrap;
+}
+.card__no svg {
+  width: 15px;
+  height: 15px;
+  flex: none;
 }
 .card__device {
   font-weight: 600;
@@ -411,7 +424,7 @@
   place-items: center;
   width: 40px;
   height: 40px;
-  border-radius: 6px;
+  border-radius: var(--radius-control);
   overflow: hidden;
   background: var(--raised);
   color: var(--muted);
@@ -436,7 +449,7 @@
   align-self: flex-start;
   max-width: 100%;
   padding: 2px 8px;
-  border-radius: 4px;
+  border-radius: var(--radius-chip);
   background: var(--st-yellow-bg);
   color: var(--st-yellow-ink);
   font-size: var(--fs-xs);
@@ -486,9 +499,9 @@
 .person__dot {
   display: grid;
   place-items: center;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-chip);
   background: var(--raised);
   color: var(--muted);
   font-size: var(--fs-xs);
@@ -568,7 +581,7 @@
   flex-direction: column;
   gap: 10px;
   padding: 12px 14px;
-  border-radius: 8px;
+  border-radius: var(--radius-card);
   background: var(--raised);
 }
 p.known {
@@ -593,7 +606,7 @@ p.known {
 .addchip .input {
   width: 128px;
   min-height: 38px;
-  border-radius: 999px;
+  border-radius: var(--radius-chip);
   padding: 0 14px;
 }
 .terms {
@@ -642,7 +655,7 @@ p.known {
 }
 .slip__missing {
   padding: 10px 12px;
-  border-radius: 8px;
+  border-radius: var(--radius-card);
   background: var(--accent-soft);
   color: var(--accent-ink);
 }
@@ -680,7 +693,7 @@ p.known {
 .done__qr {
   width: 200px;
   padding: 8px;
-  border-radius: 8px;
+  border-radius: var(--radius-card);
   background: #fff;
   border: 1px solid var(--border);
 }
@@ -719,7 +732,7 @@ p.known {
   flex-direction: column;
   min-width: 240px;
   padding: 6px;
-  border-radius: 10px;
+  border-radius: var(--radius-card);
   background: var(--surface);
   box-shadow: var(--shadow-float);
 }
@@ -729,7 +742,7 @@ p.known {
   gap: 8px;
   min-height: 38px;
   padding: 0 10px;
-  border-radius: 6px;
+  border-radius: var(--radius-control);
   color: var(--text);
   text-decoration: none;
 }
@@ -869,7 +882,7 @@ p.known {
   max-width: 100%;
   object-fit: contain;
   background: var(--raised);
-  border-radius: 6px;
+  border-radius: var(--radius-control);
   padding: 4px 10px;
 }
 .passcode {
@@ -877,7 +890,7 @@ p.known {
   align-items: center;
   gap: 10px;
   padding: 8px 10px;
-  border-radius: 8px;
+  border-radius: var(--radius-card);
   background: var(--raised);
 }
 .passcode > svg {
@@ -926,7 +939,7 @@ p.known {
   flex-direction: column;
   gap: 12px;
   padding: 14px;
-  border-radius: 8px;
+  border-radius: var(--radius-card);
   background: var(--raised);
 }
 .draft__rows {
@@ -1042,7 +1055,7 @@ p.known {
   gap: 3px;
   margin-inline-start: 8px;
   padding: 0 6px;
-  border-radius: 4px;
+  border-radius: var(--radius-chip);
   background: var(--raised);
 }
 .tl__private svg {
@@ -1064,7 +1077,7 @@ p.known {
 .jphotos__img {
   padding: 0;
   border: 0;
-  border-radius: 6px;
+  border-radius: var(--radius-control);
   overflow: hidden;
   aspect-ratio: 4 / 3;
   background: var(--raised);
@@ -1092,14 +1105,14 @@ p.known {
 }
 .addphotos {
   padding: 14px;
-  border-radius: 8px;
+  border-radius: var(--radius-card);
   background: var(--raised);
 }
 .lightbox {
   width: 100%;
   max-height: 70dvh;
   object-fit: contain;
-  border-radius: 8px;
+  border-radius: var(--radius-card);
   background: var(--raised);
 }
 
@@ -1115,7 +1128,7 @@ p.known {
   width: 200px;
   margin: 0;
   padding: 12px;
-  border-radius: 10px;
+  border-radius: var(--radius-card);
   border: 1px solid var(--border);
   text-align: center;
 }
@@ -1232,11 +1245,11 @@ p.known {
   display: block;
 }
 .bars__grid {
-  stroke: #ebe5e8;
+  stroke: #e7e5e1;
   stroke-width: 1;
 }
 .bars__base {
-  stroke: #cfc6cb;
+  stroke: #cdc9c2;
   stroke-width: 1;
 }
 .bars__tick {
@@ -1277,7 +1290,7 @@ p.known {
 .hbars__bar {
   display: block;
   height: 10px;
-  border-radius: 999px;
+  border-radius: var(--radius-chip);
   background: var(--st-grey);
 }
 .hbars__bar--yellow {
@@ -1340,7 +1353,7 @@ p.known {
 }
 .srow__panel {
   padding: 18px;
-  border-radius: 12px;
+  border-radius: var(--radius-card);
   background: var(--surface);
   border: 1px solid var(--border);
   min-width: 0;
@@ -1377,7 +1390,7 @@ ul.steps-list {
 .upload__empty {
   width: 88px;
   height: 88px;
-  border-radius: 8px;
+  border-radius: var(--radius-card);
   object-fit: contain;
   background: var(--raised);
 }
@@ -1387,6 +1400,20 @@ ul.steps-list {
   color: var(--faint);
   font-size: var(--fs-xs);
 }
+/* how the shop's name and logo will look in the header customers see */
+.logo-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px 18px;
+  border-radius: var(--radius-card);
+  background: var(--ground);
+}
+.logo-preview__label {
+  color: var(--muted);
+  font-size: var(--fs-xs);
+}
+
 /* audit log: one row per change, grouped under the day it happened */
 .audit {
   padding-block: 8px;
@@ -1518,7 +1545,7 @@ ul.steps-list {
   gap: 20px;
   width: min(400px, 100%);
   padding: 32px 28px;
-  border-radius: 14px;
+  border-radius: var(--radius-card);
   background: var(--surface);
   border: 1px solid var(--border);
 }
@@ -1676,21 +1703,22 @@ ul.steps-list {
     width: 100%;
     justify-content: flex-start;
   }
-  .table thead {
+  /* long tables stack into one card per row; a short table of numbers (.table--keep) stays a table */
+  .table:not(.table--keep) thead {
     display: none;
   }
-  .table tr {
+  .table:not(.table--keep) tr {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
     gap: 4px 12px;
     padding: 12px 0;
     border-bottom: 1px solid var(--rule);
   }
-  .table td {
+  .table:not(.table--keep) td {
     padding: 0;
     border: 0;
   }
-  .table td:first-child {
+  .table:not(.table--keep) td:first-child {
     grid-column: 1 / -1;
   }
   .hbars li {

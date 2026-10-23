@@ -5,6 +5,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { ImageUp, Plus } from 'lucide-react';
 import { api, errorMessage, fieldErrors } from '../../api/client';
 import type { Category, LaborPreset, Role, Settings as S } from '../../api/types';
+import { ShopMark } from '../../components/ShopMark';
 import { useToast } from '../../components/Toast';
 import { Button, Checkbox, Dialog, Notice, Pill, QueryState, Select, TextArea, TextField } from '../../components/ui';
 import { CATEGORY_LABEL, fmt, ROLE_LABEL } from '../../lib/format';
@@ -108,7 +109,21 @@ function useSettings() {
   return { q, save };
 }
 
-function Upload({ label, url, onUploaded, hint }: { label: string; url: string | null; onUploaded: (url: string | null) => void; hint: string }) {
+function Upload({
+  label,
+  url,
+  onUploaded,
+  hint,
+  empty = 'ยังไม่มีรูป',
+  removeLabel = 'เอารูปออก',
+}: {
+  label: string;
+  url: string | null;
+  onUploaded: (url: string | null) => void;
+  hint: string;
+  empty?: string;
+  removeLabel?: string;
+}) {
   const toast = useToast();
   const [busy, setBusy] = useState(false);
   async function pick(file: File | undefined) {
@@ -129,7 +144,7 @@ function Upload({ label, url, onUploaded, hint }: { label: string; url: string |
     <div className="field">
       <span className="field__label">{label}</span>
       <div className="upload">
-        {url ? <img src={url} alt="" className="upload__img" /> : <span className="upload__empty">ยังไม่มีรูป</span>}
+        {url ? <img src={url} alt="" className="upload__img" /> : <span className="upload__empty">{empty}</span>}
         <div className="stack" style={{ ['--stack' as string]: '6px' }}>
           <label className="btn btn--sm">
             <ImageUp aria-hidden="true" />
@@ -138,7 +153,7 @@ function Upload({ label, url, onUploaded, hint }: { label: string; url: string |
           </label>
           {url && (
             <Button size="sm" variant="ghost" onClick={() => onUploaded(null)}>
-              เอารูปออก
+              {removeLabel}
             </Button>
           )}
         </div>
@@ -151,19 +166,41 @@ function Upload({ label, url, onUploaded, hint }: { label: string; url: string |
 function ShopInfo() {
   const { q, save } = useSettings();
   const [f, setF] = useState<Partial<S>>({});
+  // Fill the form once; after that, saving a picture must not wipe text the owner is still typing.
   useEffect(() => {
-    if (q.data) setF(q.data);
+    if (q.data) setF((x) => (Object.keys(x).length ? x : q.data!));
   }, [q.data]);
   const errs = fieldErrors(save.error);
   const set = (k: keyof S) => (e: { target: { value: string } }) => setF((x) => ({ ...x, [k]: e.target.value }));
+  /** Pictures save as soon as they are uploaded or removed, so there is nothing left to forget. */
+  const savePicture = (k: 'logoUrl' | 'promptpayImageUrl') => (url: string | null) => {
+    setF((x) => ({ ...x, [k]: url }));
+    save.mutate({ [k]: url });
+  };
   function submit(e: FormEvent) {
     e.preventDefault();
-    save.mutate({ shopName: f.shopName, phone: f.phone, address: f.address, lineOaUrl: f.lineOaUrl, logoUrl: f.logoUrl, promptpayImageUrl: f.promptpayImageUrl });
+    save.mutate({ shopName: f.shopName, phone: f.phone, address: f.address, lineOaUrl: f.lineOaUrl });
   }
   return (
     <QueryState loading={q.isLoading} error={q.error}>
       <form onSubmit={submit}>
-        <Row title="ข้อมูลร้าน" help="ชื่อ โลโก้ เบอร์โทร และที่อยู่ พิมพ์บนใบรับเครื่อง ใบเสร็จ และแสดงบนหน้าสถานะที่ลูกค้าเปิดจาก QR">
+        <Row title="โลโก้ร้าน" help="ไม่ใส่ก็ได้ ร้านที่ไม่มีโลโก้ ระบบแสดงชื่อร้านอย่างเดียว ทั้งบนเมนู หน้าที่ลูกค้าเปิดจาก QR ใบรับเครื่อง และใบเสร็จ">
+          <div className="stack">
+            <div className="logo-preview">
+              <span className="logo-preview__label">ตัวอย่างที่ลูกค้าเห็น</span>
+              <ShopMark size="lg" name={f.shopName ?? ''} logoUrl={f.logoUrl ?? null} />
+            </div>
+            <Upload
+              label="ไฟล์โลโก้"
+              url={f.logoUrl ?? null}
+              onUploaded={savePicture('logoUrl')}
+              hint="PNG หรือ JPG ไม่เกิน 3 MB รูปสี่เหลี่ยมจัตุรัสพื้นขาวหรือพื้นใสจะดูดีที่สุด บันทึกทันทีที่อัปโหลด"
+              empty="ไม่มีโลโก้"
+              removeLabel="ไม่ใช้โลโก้"
+            />
+          </div>
+        </Row>
+        <Row title="ข้อมูลร้าน" help="ชื่อ เบอร์โทร และที่อยู่ พิมพ์บนใบรับเครื่อง ใบเสร็จ และแสดงบนหน้าสถานะที่ลูกค้าเปิดจาก QR">
           <div className="stack">
             <TextField label="ชื่อร้าน" value={f.shopName ?? ''} onChange={set('shopName')} error={errs.shopName} required />
             <div className="grid2">
@@ -171,15 +208,14 @@ function ShopInfo() {
               <TextField label="ลิงก์ LINE OA ของร้าน" placeholder="https://lin.ee/..." value={f.lineOaUrl ?? ''} onChange={set('lineOaUrl')} />
             </div>
             <TextArea label="ที่อยู่ร้าน" rows={2} value={f.address ?? ''} onChange={set('address')} />
-            <Upload label="โลโก้ร้าน" url={f.logoUrl ?? null} onUploaded={(url) => setF((x) => ({ ...x, logoUrl: url }))} hint="PNG หรือ JPG สี่เหลี่ยมจัตุรัส ไม่เกิน 3 MB" />
           </div>
         </Row>
         <Row title="รับเงินผ่านพร้อมเพย์" help="รูป QR พร้อมเพย์ของร้าน แสดงให้ลูกค้าสแกนจ่ายในหน้าสถานะเมื่อเครื่องเสร็จ และบนจอหน้าร้านตอนส่งมอบ">
           <Upload
             label="QR พร้อมเพย์"
             url={f.promptpayImageUrl ?? null}
-            onUploaded={(url) => setF((x) => ({ ...x, promptpayImageUrl: url }))}
-            hint="บันทึกรูป QR จากแอปธนาคารของร้าน แล้วอัปโหลดที่นี่"
+            onUploaded={savePicture('promptpayImageUrl')}
+            hint="บันทึกรูป QR จากแอปธนาคารของร้าน แล้วอัปโหลดที่นี่ บันทึกทันทีที่อัปโหลด"
           />
         </Row>
         <div className="sfoot">

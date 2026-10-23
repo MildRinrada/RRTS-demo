@@ -44,10 +44,9 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
-  padding: 22px 20px;
-  border-radius: 14px;
+  padding: 24px 22px;
+  border-radius: var(--radius-card);
   background: var(--surface);
-  box-shadow: inset 0 0 0 1px var(--border);
 }
 .answer__q {
   color: var(--muted);
@@ -66,12 +65,18 @@
   color: var(--muted);
   font-size: var(--fs-xs);
 }
+/* ready to collect: the one screen that turns fully green, like the shop's own signboard */
 .answer--ready {
-  box-shadow: inset 0 0 0 1px #bfe6cd;
-  background: #f4fbf6;
+  box-shadow: none;
+  background: var(--accent);
+  color: var(--on-accent);
 }
-.answer--ready .answer__q {
-  color: var(--st-green-ink);
+.answer--ready .answer__q,
+.answer--ready .answer__note {
+  color: rgb(255 255 255 / 0.82);
+}
+.answer--ready .promptpay {
+  color: var(--text);
 }
 .answer--done .answer__big {
   font-size: clamp(1.625rem, 1.3rem + 1.6vw, 2rem);
@@ -86,7 +91,7 @@
   gap: 2px;
   margin-top: 10px;
   padding: 12px 14px;
-  border-radius: 10px;
+  border-radius: var(--radius-card);
   background: var(--st-grey-bg);
   color: var(--st-grey-ink);
 }
@@ -107,7 +112,7 @@
   align-items: center;
   margin-top: 10px;
   padding: 12px;
-  border-radius: 10px;
+  border-radius: var(--radius-card);
   background: var(--surface);
 }
 .promptpay img {
@@ -127,7 +132,7 @@
   flex-direction: column;
   gap: 10px;
   padding: 20px;
-  border-radius: 14px;
+  border-radius: var(--radius-card);
   background: var(--accent-soft);
   box-shadow: inset 0 0 0 1px var(--accent-track);
 }
@@ -199,7 +204,7 @@
   flex-direction: column;
   gap: 4px;
   padding: 16px 18px 16px 28px;
-  border-radius: 14px;
+  border-radius: var(--radius-card);
   background: var(--surface);
   box-shadow:
     inset 8px 0 0 var(--accent-track),
@@ -279,9 +284,8 @@
   flex-direction: column;
   gap: 12px;
   padding: 18px 20px;
-  border-radius: 14px;
+  border-radius: var(--radius-card);
   background: var(--surface);
-  box-shadow: inset 0 0 0 1px var(--border);
 }
 .csec__title {
   font-size: var(--fs-md);
@@ -356,7 +360,7 @@
 .cphotos button {
   padding: 0;
   border: 0;
-  border-radius: 8px;
+  border-radius: var(--radius-card);
   overflow: hidden;
   aspect-ratio: 1;
   background: var(--raised);
@@ -375,7 +379,7 @@
   width: 100%;
   max-height: 70dvh;
   object-fit: contain;
-  border-radius: 8px;
+  border-radius: var(--radius-card);
   background: var(--raised);
 }
 .cfoot {

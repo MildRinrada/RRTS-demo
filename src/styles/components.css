@@ -5,12 +5,12 @@
   justify-content: center;
   gap: 8px;
   min-height: var(--control-h);
-  padding: 0 14px;
-  border: 1px solid var(--control);
+  padding: 0 18px;
+  border: 1px solid transparent;
   border-radius: var(--radius-control);
-  background: var(--surface);
+  background: var(--btn-2);
   color: var(--text);
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.2;
   text-decoration: none;
   white-space: nowrap;
@@ -26,7 +26,7 @@
   flex: none;
 }
 .btn:hover {
-  background: var(--raised);
+  background: var(--btn-2-hover);
   color: var(--text);
 }
 .btn:active {
@@ -57,7 +57,7 @@
 }
 .btn--accent {
   background: var(--accent-soft);
-  border-color: var(--accent-track);
+  border-color: transparent;
   color: var(--accent-ink);
 }
 .btn--accent:hover {
@@ -72,8 +72,8 @@
   background: var(--active);
 }
 .btn--danger {
-  border-color: var(--pill-negative-bg);
-  background: var(--surface);
+  border-color: transparent;
+  background: var(--pill-negative-bg);
   color: var(--negative);
 }
 .btn--danger:hover {
@@ -82,7 +82,7 @@
 }
 .btn--sm {
   min-height: var(--control-h-sm);
-  padding: 0 10px;
+  padding: 0 12px;
   font-size: var(--fs-xs);
 }
 .btn--lg {
@@ -166,7 +166,7 @@
   color: var(--faint);
 }
 .input:hover {
-  border-color: #b9aeb4;
+  border-color: #a6a29a;
 }
 .input:focus-visible {
   outline: 2px solid var(--accent);
@@ -235,7 +235,7 @@
   min-height: 38px;
   padding: 0 14px;
   border: 1px solid var(--control);
-  border-radius: 999px;
+  border-radius: var(--radius-chip);
   background: var(--surface);
   color: var(--text);
   cursor: pointer;
@@ -244,7 +244,7 @@
     border-color var(--dur) var(--ease);
 }
 .tchip:hover {
-  border-color: #b9aeb4;
+  border-color: #a6a29a;
 }
 .tchip[aria-pressed='true'] {
   background: var(--accent-soft);
@@ -263,9 +263,9 @@
   align-items: center;
   gap: 6px;
   flex: none;
-  min-height: 22px;
-  padding: 0 9px;
-  border-radius: 999px;
+  min-height: 26px;
+  padding: 0 10px;
+  border-radius: var(--radius-chip);
   font-size: var(--fs-xs);
   font-weight: 500;
   line-height: 1.2;
@@ -387,20 +387,20 @@
 /* ---------------- segmented ---------------- */
 .segmented {
   display: inline-flex;
-  gap: 2px;
-  padding: 3px;
-  border-radius: calc(var(--radius-control) + 3px);
-  background: var(--raised);
+  gap: 6px;
+  padding: 0;
+  border-radius: var(--radius-control);
+  background: transparent;
   max-width: 100%;
   overflow-x: auto;
 }
 .segmented button {
-  min-height: calc(var(--control-h) - 6px);
-  padding: 0 12px;
+  min-height: var(--control-h);
+  padding: 0 16px;
   border: 1px solid transparent;
   border-radius: var(--radius-control);
-  background: transparent;
-  color: var(--muted);
+  background: var(--surface);
+  color: var(--text);
   font-weight: 500;
   white-space: nowrap;
   cursor: pointer;
@@ -413,15 +413,15 @@
   height: 16px;
 }
 .segmented button:hover {
-  color: var(--text);
+  background: var(--btn-2-hover);
 }
 .segmented button[aria-checked='true'] {
-  background: var(--surface);
-  color: var(--text);
-  border-color: var(--border);
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 600;
 }
 .segmented--sm button {
-  min-height: 26px;
+  min-height: var(--control-h-sm);
   font-size: var(--fs-xs);
 }
 
@@ -431,7 +431,7 @@
   max-height: calc(100dvh - 48px);
   padding: 0;
   border: 0;
-  border-radius: 12px;
+  border-radius: var(--radius-card);
   background: var(--surface);
   color: var(--text);
   box-shadow: var(--shadow-float);
@@ -519,7 +519,7 @@
   gap: 8px;
   max-width: calc(100vw - 32px);
   padding: 10px 16px;
-  border-radius: 10px;
+  border-radius: var(--radius-card);
   background: var(--text);
   color: #fff;
   box-shadow: var(--shadow-float);
@@ -678,10 +678,10 @@ input:focus-visible + .photos__add,
   max-height: 60dvh;
   margin-inline: auto;
   width: 100%;
-  border-radius: 12px;
+  border-radius: var(--radius-card);
   overflow: hidden;
   background: #0d0b0e;
-  color: #f2f0f1;
+  color: #f1f0ed;
 }
 .viewfinder video {
   width: 100%;
@@ -691,7 +691,7 @@ input:focus-visible + .photos__add,
 .viewfinder__frame {
   position: absolute;
   inset: 18%;
-  border-radius: 14px;
+  border-radius: var(--radius-card);
   box-shadow: 0 0 0 2px rgb(255 255 255 / 0.85);
 }
 .viewfinder--idle .viewfinder__frame,
@@ -732,20 +732,11 @@ input:focus-visible + .photos__add,
   min-width: 0;
   color: var(--text);
 }
-.shopmark__mono,
 .shopmark__img {
   flex: none;
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-}
-.shopmark__mono {
-  display: grid;
-  place-items: center;
-  background: var(--accent);
-  color: var(--on-accent);
-  font-weight: 700;
-  font-size: var(--fs-body);
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-card);
 }
 .shopmark__img {
   object-fit: contain;
@@ -760,20 +751,25 @@ input:focus-visible + .photos__add,
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
-.shopmark--lg .shopmark__mono,
 .shopmark--lg .shopmark__img {
-  width: 44px;
-  height: 44px;
-  border-radius: 10px;
-  font-size: var(--fs-lg);
+  width: 52px;
+  height: 52px;
 }
 .shopmark--lg .shopmark__name {
   font-size: var(--fs-md);
 }
-.shopmark--sm .shopmark__mono,
+/* name alone: set a step larger and heavier, so it still reads as the shop's sign */
+.shopmark--text .shopmark__name {
+  font-size: var(--fs-md);
+  font-weight: 700;
+  letter-spacing: -0.005em;
+}
+.shopmark--text.shopmark--lg .shopmark__name {
+  font-size: var(--fs-lg);
+}
 .shopmark--sm .shopmark__img {
   width: 26px;
   height: 26px;
-  border-radius: 6px;
+  border-radius: var(--radius-control);
   font-size: var(--fs-xs);
 }

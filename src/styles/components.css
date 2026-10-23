@@ -83,12 +83,12 @@
 .btn--sm {
   min-height: var(--control-h-sm);
   padding: 0 10px;
-  font-size: var(--fs-small);
+  font-size: var(--fs-xs);
 }
 .btn--lg {
   min-height: var(--control-h-lg);
   padding: 0 20px;
-  font-size: 1rem;
+  font-size: var(--fs-body);
 }
 .btn--block {
   width: 100%;
@@ -123,7 +123,7 @@
 }
 .field__label {
   font-weight: 500;
-  font-size: 0.875rem;
+  font-size: var(--fs-xs);
 }
 .field__req {
   color: var(--negative);
@@ -132,19 +132,19 @@
 .field__opt {
   color: var(--muted);
   font-weight: 400;
-  font-size: var(--fs-small);
+  font-size: var(--fs-xs);
   margin-inline-start: 6px;
 }
 .field__hint {
   color: var(--muted);
-  font-size: var(--fs-small);
+  font-size: var(--fs-xs);
 }
 .field__error {
   display: flex;
   align-items: flex-start;
   gap: 6px;
   color: var(--negative);
-  font-size: var(--fs-small);
+  font-size: var(--fs-xs);
 }
 .field__error svg {
   width: 14px;
@@ -200,7 +200,7 @@
   top: 50%;
   transform: translateY(-50%);
   color: var(--muted);
-  font-size: var(--fs-small);
+  font-size: var(--fs-xs);
   pointer-events: none;
 }
 
@@ -224,7 +224,7 @@
 }
 .check__text small {
   color: var(--muted);
-  font-size: var(--fs-small);
+  font-size: var(--fs-xs);
 }
 
 /* a chip that toggles: accessories, condition */
@@ -266,7 +266,7 @@
   min-height: 22px;
   padding: 0 9px;
   border-radius: 999px;
-  font-size: 0.8125rem;
+  font-size: var(--fs-xs);
   font-weight: 500;
   line-height: 1.2;
   white-space: nowrap;
@@ -346,7 +346,7 @@
   padding: 12px 14px;
   border-radius: var(--radius-card);
   background: var(--raised);
-  font-size: 0.875rem;
+  font-size: var(--fs-xs);
 }
 .notice > svg {
   width: 18px;
@@ -422,7 +422,7 @@
 }
 .segmented--sm button {
   min-height: 26px;
-  font-size: var(--fs-small);
+  font-size: var(--fs-xs);
 }
 
 /* ---------------- dialog ---------------- */
@@ -493,7 +493,7 @@
   border: 1px dashed var(--control);
   border-radius: var(--radius-card);
   color: var(--muted);
-  font-size: 0.875rem;
+  font-size: var(--fs-xs);
   grid-column: 1 / -1;
 }
 .empty strong {
@@ -590,7 +590,7 @@
   border-radius: var(--radius-control);
   background: var(--surface);
   color: var(--muted);
-  font-size: var(--fs-small);
+  font-size: var(--fs-xs);
   cursor: pointer;
 }
 .photos__add:hover {
@@ -655,7 +655,7 @@ input:focus-visible + .photos__add,
   border-radius: var(--radius-control);
   background: var(--raised);
   color: var(--muted);
-  font-size: var(--fs-small);
+  font-size: var(--fs-xs);
   cursor: pointer;
 }
 .sigpad__clear:disabled {
@@ -721,7 +721,7 @@ input:focus-visible + .photos__add,
   inset-inline: 0;
   bottom: 12px;
   text-align: center;
-  font-size: 0.875rem;
+  font-size: var(--fs-xs);
 }
 
 /* ---------------- the shop's mark ---------------- */
@@ -745,7 +745,7 @@ input:focus-visible + .photos__add,
   background: var(--accent);
   color: var(--on-accent);
   font-weight: 700;
-  font-size: 1rem;
+  font-size: var(--fs-body);
 }
 .shopmark__img {
   object-fit: contain;
@@ -765,15 +765,15 @@ input:focus-visible + .photos__add,
   width: 44px;
   height: 44px;
   border-radius: 10px;
-  font-size: 1.25rem;
+  font-size: var(--fs-lg);
 }
 .shopmark--lg .shopmark__name {
-  font-size: 1.0625rem;
+  font-size: var(--fs-md);
 }
 .shopmark--sm .shopmark__mono,
 .shopmark--sm .shopmark__img {
   width: 26px;
   height: 26px;
   border-radius: 6px;
-  font-size: 0.875rem;
+  font-size: var(--fs-xs);
 }

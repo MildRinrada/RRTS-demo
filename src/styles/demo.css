@@ -20,7 +20,7 @@
   padding: 0 16px;
   background: var(--accent-ink);
   color: var(--on-accent);
-  font-size: var(--fs-small);
+  font-size: var(--fs-xs);
 }
 .demobar__text {
   display: flex;
@@ -36,8 +36,8 @@
   gap: 4px;
   flex: none;
 }
-.demobar__links a,
-.demobar__links button {
+.demobar__links > button,
+.roleswitch__toggle {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -51,11 +51,12 @@
   text-decoration: none;
   cursor: pointer;
 }
-.demobar__links a:hover,
-.demobar__links button:hover {
+.demobar__links > button:hover,
+.roleswitch__toggle:hover {
   background: rgb(255 255 255 / 0.14);
 }
-.demobar__links svg {
+.demobar__links > button svg,
+.roleswitch__toggle svg {
   width: 14px;
   height: 14px;
 }
@@ -72,6 +73,91 @@
 }
 .intake__rail {
   top: calc(var(--demobar-h) + 24px);
+}
+
+/* ---------------- role switcher ---------------- */
+.roleswitch {
+  position: relative;
+}
+.demobar .roleswitch__toggle {
+  background: rgb(255 255 255 / 0.1);
+}
+.roleswitch__role {
+  opacity: 0.85;
+}
+.roleswitch__menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 50;
+  width: min(360px, calc(100vw - 24px));
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow-float);
+}
+.roleswitch__head {
+  padding: 6px 8px 8px;
+  color: var(--muted);
+  font-size: var(--fs-xs);
+}
+.roleswitch__item {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) 18px;
+  align-items: start;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 8px;
+  border: 0;
+  border-radius: var(--radius-control);
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: var(--fs-body);
+  text-align: start;
+  cursor: pointer;
+}
+.roleswitch__item:hover {
+  background: var(--raised);
+}
+.roleswitch__item[aria-current] {
+  background: var(--accent-soft);
+}
+.roleswitch__item:disabled {
+  cursor: progress;
+}
+.roleswitch__who {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.roleswitch__mark {
+  width: 18px;
+  height: 18px;
+  margin-top: 3px;
+  color: var(--accent);
+}
+.roleswitch__home {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  padding: 10px 8px;
+  border-top: 1px solid var(--rule);
+  color: var(--text);
+  font-size: var(--fs-xs);
+  text-decoration: none;
+}
+.roleswitch__home:hover {
+  color: var(--accent-ink);
+}
+.roleswitch__home svg {
+  width: 16px;
+  height: 16px;
+  color: var(--muted);
 }
 
 /* ---------------- start page ---------------- */
@@ -96,7 +182,7 @@
 .demo__lead {
   max-width: 64ch;
   color: var(--muted);
-  font-size: 1.0625rem;
+  font-size: var(--fs-md);
 }
 .demo__grid {
   display: grid;
@@ -186,12 +272,12 @@
 .demo__n {
   grid-row: 1;
   color: var(--accent);
-  font-size: 1.25rem;
+  font-size: var(--fs-lg);
   font-weight: 700;
   line-height: 1.3;
 }
 .demo__trytitle {
-  font-size: 1rem;
+  font-size: var(--fs-md);
   font-weight: 600;
 }
 .demo__go {
@@ -207,7 +293,7 @@
 }
 .demo__foottitle {
   margin-bottom: 6px;
-  font-size: 1rem;
+  font-size: var(--fs-md);
   font-weight: 600;
 }
 .demo__notes {
@@ -228,7 +314,7 @@
   border-top: 1px solid var(--rule);
 }
 .login__demotitle {
-  font-size: 0.875rem;
+  font-size: var(--fs-sm);
   font-weight: 600;
 }
 .login__demolist {
@@ -255,7 +341,7 @@
   background: var(--surface);
 }
 .print__title {
-  font-size: 1rem;
+  font-size: var(--fs-body);
   font-weight: 600;
 }
 .print__desk {

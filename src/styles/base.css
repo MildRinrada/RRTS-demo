@@ -131,7 +131,7 @@ th.num {
   color: var(--faint);
 }
 .t-small {
-  font-size: var(--fs-small);
+  font-size: var(--fs-xs);
 }
 .t-strong {
   font-weight: 600;

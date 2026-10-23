@@ -862,16 +862,53 @@ route('PATCH', '/shop/settings', 'owner', ({ db, body, actor }) => {
   return db.settings;
 });
 route('POST', '/shop/settings/upload', 'owner', async ({ body }) => ({ url: await saveImage(form(body).get('file'), MAX_BRAND, 720) }));
+const AUDIT_PAGE = 25;
+
+/** The filter chips on the audit page, as the actions each one covers. */
+const AUDIT_KINDS: Record<string, string[]> = {
+  job: ['job.intake', 'job.status', 'job.update', 'job.claim', 'job.deliver', 'photo.add', 'photo.visibility'],
+  quote: ['quote.draft', 'quote.send', 'quote.approve', 'quote.reject', 'quote.callback'],
+  money: ['payment.add'],
+  passcode: ['passcode.view'],
+  shop: ['auth.login', 'user.create', 'user.update', 'user.password', 'settings.update', 'labor_preset.create', 'labor_preset.update', 'customer.update', 'customer.link_line'],
+};
+
+/** One page of the log, newest first, with the job number or name each row is about. */
 route('GET', '/shop/audit-logs', 'owner', ({ db, query }) => {
-  const before = query.get('before');
-  const entity = query.get('entity');
-  const entityId = query.get('entityId');
-  return db.audit
-    .filter(
-      (a) => (before && /^\d+$/.test(before) ? a.id < Number(before) : true) && (entity ? a.entity === entity : true) && (entityId && /^\d+$/.test(entityId) ? a.entityId === Number(entityId) : true),
-    )
-    .sort((a, b) => b.id - a.id)
-    .slice(0, 100);
+  const kind = query.get('kind');
+  const actor = query.get('actor');
+  const rows = db.audit
+    .filter((a) => (kind && AUDIT_KINDS[kind] ? AUDIT_KINDS[kind].includes(a.action) : true))
+    .filter((a) => (actor === 'customer' ? a.actorUserId === null : actor && /^\d+$/.test(actor) ? a.actorUserId === Number(actor) : true))
+    .sort((a, b) => b.id - a.id);
+  const pages = Math.max(1, Math.ceil(rows.length / AUDIT_PAGE));
+  const asked = query.get('page');
+  const page = Math.min(pages, asked && /^\d{1,6}$/.test(asked) ? Math.max(1, Number(asked)) : 1);
+  const job = (id: number | undefined) => {
+    const j = db.jobs.find((x) => x.id === id);
+    return j ? { type: 'job' as const, id: j.id, label: j.jobNo } : null;
+  };
+  const subject = (a: (typeof rows)[number]) => {
+    const id = a.entityId ?? undefined;
+    if (a.entity === 'repair_job') return job(id);
+    if (a.entity === 'quote') return job(db.quotes.find((q) => q.id === id)?.jobId);
+    if (a.entity === 'customer') {
+      const c = db.customers.find((x) => x.id === id);
+      return c ? { type: 'customer' as const, id: c.id, label: c.fullName } : null;
+    }
+    if (a.entity === 'user') return { type: 'user' as const, id: id ?? null, label: rel.userName(db, id ?? null) ?? '' };
+    if (a.entity === 'labor_preset') return { type: 'preset' as const, id: id ?? null, label: db.presets.find((x) => x.id === id)?.name ?? '' };
+    if (a.entity === 'settings') return { type: 'settings' as const, id: null, label: 'ตั้งค่าร้าน' };
+    return null;
+  };
+  return {
+    page,
+    pageSize: AUDIT_PAGE,
+    total: rows.length,
+    rows: rows
+      .slice((page - 1) * AUDIT_PAGE, page * AUDIT_PAGE)
+      .map((a) => ({ id: a.id, createdAt: a.createdAt, actorUserId: a.actorUserId, actorLabel: a.actorLabel, action: a.action, diff: a.diff, subject: subject(a) })),
+  };
 });
 
 /* ---------------- dispatch ---------------- */

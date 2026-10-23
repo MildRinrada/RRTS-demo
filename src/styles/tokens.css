@@ -62,13 +62,17 @@
   --shadow-float: 0 12px 32px rgb(22 18 26 / 0.16), 0 2px 6px rgb(22 18 26 / 0.08);
 
   --font: "IBM Plex Sans Thai", "Noto Sans Thai", system-ui, sans-serif;
-  --fs-title: 1.625rem;
-  --fs-section: 1.125rem;
-  --fs-kpi: 1.5rem;
-  --fs-lead: 2rem;
-  --fs-body: 0.9375rem;
-  --fs-small: 0.8125rem;
-  --lh: 1.6;
+  /* type scale: 15 for hints and secondary lines, 16 for tables and controls, 17 for reading */
+  --fs-xs: 0.9375rem;
+  --fs-sm: 1rem;
+  --fs-body: 1.0625rem;
+  --fs-md: 1.1875rem;
+  --fs-lg: 1.375rem;
+  --fs-title: 1.75rem;
+  --fs-section: var(--fs-md);
+  --fs-kpi: 1.75rem;
+  --fs-lead: 2.25rem;
+  --lh: 1.65;
 
   --radius-card: 8px;
   --radius-control: 6px;
@@ -77,10 +81,10 @@
   --gap: 24px;
   --pad: 24px;
   --card-pad: 20px;
-  --control-h: 36px;
-  --control-h-lg: 44px;
-  --control-h-sm: 30px;
-  --sidebar-w: 232px;
+  --control-h: 44px;
+  --control-h-lg: 48px;
+  --control-h-sm: 36px;
+  --sidebar-w: 248px;
   --rail-w: 368px;
   --tap: 44px;
 
@@ -95,8 +99,8 @@
     --pad: 16px;
     --gap: 16px;
     --card-pad: 16px;
-    --fs-title: 1.375rem;
-    --control-h: 42px;
+    --fs-title: 1.5rem;
+    --control-h: 44px;
   }
 }
 
